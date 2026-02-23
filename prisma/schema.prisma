@@ -12,18 +12,48 @@ datasource db {
   provider = "postgresql"
 }
 
+enum Status {
+  UPCOMING
+  ACTIVE
+  COMPLETED
+  CANCELLED
+}
+
 model Meeting {
-  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  title      String
-  date       DateTime @db.Date
-  time       DateTime @db.Time
-  location   String?
-  createdAt  DateTime @default(now()) @map("created_at") @db.Timestamptz
-  agenda     AgendaItem[]
+  id           String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title        String
+  date         DateTime      @db.Date
+  time         DateTime      @db.Time
+  location     String?
+  status       Status        @default(UPCOMING)
+  createdAt    DateTime      @default(now()) @map("created_at") @db.Timestamptz
+  agenda       AgendaItem[]
   participants Participant[]
-  notes      Note[]
+  notes        Note[]
+  resources    Resource[]
+  tags         Tag[]
 
   @@map("meetings")
+}
+
+model Resource {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  meetingId String   @map("meeting_id") @db.Uuid
+  title     String
+  url       String
+  type      String   @default("LINK") // LINK, FILE
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+  meeting   Meeting  @relation(fields: [meetingId], references: [id], onDelete: Cascade)
+
+  @@map("resources")
+}
+
+model Tag {
+  id       String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name     String    @unique
+  meetings Meeting[]
+
+  @@map("tags")
 }
 
 model AgendaItem {
