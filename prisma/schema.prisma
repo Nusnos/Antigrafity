@@ -1,0 +1,58 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Meeting {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title      String
+  date       DateTime @db.Date
+  time       DateTime @db.Time
+  location   String?
+  createdAt  DateTime @default(now()) @map("created_at") @db.Timestamptz
+  agenda     AgendaItem[]
+  participants Participant[]
+  notes      Note[]
+
+  @@map("meetings")
+}
+
+model AgendaItem {
+  id          String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  meetingId   String  @map("meeting_id") @db.Uuid
+  title       String
+  description String?
+  isDone      Boolean @default(false) @map("is_done")
+  meeting     Meeting @relation(fields: [meetingId], references: [id], onDelete: Cascade)
+
+  @@map("agenda_items")
+}
+
+model Participant {
+  id        String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  meetingId String  @map("meeting_id") @db.Uuid
+  name      String
+  email     String
+  isPresent Boolean @default(false) @map("is_present")
+  meeting   Meeting @relation(fields: [meetingId], references: [id], onDelete: Cascade)
+
+  @@map("participants")
+}
+
+model Note {
+  id        String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  meetingId String  @map("meeting_id") @db.Uuid
+  content   String?
+  meeting   Meeting @relation(fields: [meetingId], references: [id], onDelete: Cascade)
+
+  @@map("notes")
+}
