@@ -20,9 +20,10 @@ export async function getMeetings() {
             },
         });
         return meetings;
-    } catch (error) {
+    } catch (error: any) {
         console.error('Failed to fetch meetings:', error);
-        return [];
+        // Temporarily return error as a marker for debugging
+        return [{ __error: error?.message || String(error) }];
     }
 }
 
