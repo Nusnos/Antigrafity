@@ -1,7 +1,18 @@
 import { getMeetings, createMeeting } from '@/lib/actions';
 
+export const dynamic = 'force-dynamic';
+
+interface Meeting {
+  id: string;
+  title: string;
+  date: Date | string;
+  time: Date | string;
+  location: string | null;
+  participants: any[];
+}
+
 export default async function Home() {
-  const meetings = await getMeetings();
+  const meetings: Meeting[] = await getMeetings();
 
   return (
     <div>
