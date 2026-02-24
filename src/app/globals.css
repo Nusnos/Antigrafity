@@ -1,29 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap');
 
 :root {
-  --background: #0a0a0c;
-  --foreground: #f8fafc;
-  --card: #141417;
-  --card-foreground: #f8fafc;
-  --popover: #141417;
-  --popover-foreground: #f8fafc;
-  --primary: #6366f1;
+  --background: #ffffff;
+  --foreground: #1a1a2e;
+  --card: #f4f6fb;
+  --card-foreground: #1a1a2e;
+  --popover: #f4f6fb;
+  --popover-foreground: #1a1a2e;
+  --primary: #4169E1;
   --primary-foreground: #ffffff;
-  --secondary: #1e1e24;
-  --secondary-foreground: #f8fafc;
-  --muted: #1e1e24;
-  --muted-foreground: #94a3b8;
-  --accent: #6366f1;
-  --accent-foreground: #f8fafc;
+  --secondary: #e8edf8;
+  --secondary-foreground: #1a1a2e;
+  --muted: #e8edf8;
+  --muted-foreground: #5a6a8a;
+  --accent: #4169E1;
+  --accent-foreground: #ffffff;
   --destructive: #ef4444;
-  --destructive-foreground: #f8fafc;
-  --border: #27272a;
-  --input: #27272a;
-  --ring: #6366f1;
+  --destructive-foreground: #ffffff;
+  --border: #d0d9ee;
+  --input: #d0d9ee;
+  --ring: #4169E1;
   --radius: 0.75rem;
 
-  --glass: rgba(20, 20, 23, 0.8);
-  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(65, 105, 225, 0.15);
 }
 
 .dashboard-container {
@@ -110,11 +110,11 @@ a {
 .card-hover:hover {
   transform: translateY(-4px);
   border-color: var(--primary) !important;
-  box-shadow: 0 10px 30px -10px rgba(99, 102, 241, 0.3);
+  box-shadow: 0 10px 30px -10px rgba(65, 105, 225, 0.25);
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+  background: linear-gradient(135deg, #1a1a2e 0%, #4169E1 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
