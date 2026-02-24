@@ -17,7 +17,7 @@ export default function Header() {
                 position: 'sticky',
                 top: 0,
                 zIndex: 10,
-                background: 'rgba(10, 10, 12, 0.7)',
+                background: 'rgba(255, 255, 255, 0.9)',
                 backdropFilter: 'blur(10px)'
             }}>
                 <div>
